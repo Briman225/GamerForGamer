@@ -1,19 +1,20 @@
-const sequelize = require('./config/database');
+// Import necessary modules
+const express = require('express');
+const bodyParser = require('body-parser');
+
+// Create an instance of Express
+const app = express();
+
+// Use body-parser middleware to parse JSON requests
+app.use(bodyParser.json());
+
+// Start the server
+const PORT = process.env.PORT || 3000; // Use environment variable or default to 3000
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
+
 const User = require('./models/User');
-
-// Sync the models and create tables
-(async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-
-    // Sync models to the database (creates tables if they don't exist)
-    await sequelize.sync({ force: false });
-    console.log('Database synced successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-})();
 
 // Get all users
 app.get('/users', async (req, res) => {
@@ -36,7 +37,7 @@ app.post('/users', async (req, res) => {
 	}
   });
 
-// Update a user by ID
+  // Update a user by ID
 app.put('/users/:id', async (req, res) => {
 	try {
 	  const { id } = req.params;
@@ -59,3 +60,4 @@ app.put('/users/:id', async (req, res) => {
 	  res.status(500).json({ error: 'Unable to update user' });
 	}
   });
+  
