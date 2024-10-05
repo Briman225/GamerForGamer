@@ -1,0 +1,32 @@
+{
+	"conversationId": "Example",
+	"participants": [
+		{
+			"userId": "1",
+			"name": "John"
+		},
+		{
+			"userId": "2",
+			"name": "Jane"
+		}
+	],
+	"messages": [
+		{
+			"messageId": "1",
+			"senderId": "1",
+			"message": "Hello Person",
+			"timestamp": "2024-01-01T00:00:00Z"
+		},
+		{
+			"messageId": "2",
+			"senderId": "2",
+			"message": "Hello Other Person",
+			"timestamp": "2024-01-01T00:00:01Z"
+		}
+	],
+	"conversationMeta": {
+		"startDate": "2024-01-01T00:00:00Z",
+		"lastMessageDate": "2024-00-01T00:00:01Z",
+		"isActive": false
+	}
+}
