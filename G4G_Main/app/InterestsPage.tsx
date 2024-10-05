@@ -23,17 +23,34 @@ export default function PersonalInfo() {
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Tags</Text>
         <TextInput style={styles.input} placeholder="Search" />
-        <View  style={{justifyContent:'space-between', flexDirection:'row'}}>
+        <View  style={{justifyContent:'space-evenly', flexDirection:'row',
+          flexWrap:'wrap', paddingHorizontal:40, gap:3
+        }}>
         <Tag topic="League of Legends" onPress={() => 
           {console.log('yippie');
           }}></Tag>
-          <Link href="../IntrestsPage" asChild>
+          <Tag topic="League of Legends" onPress={() => 
+          {console.log('yippie');
+          }}></Tag>
+          <Tag topic="League of Legends" onPress={() => 
+          {console.log('yippie');
+          }}></Tag>
+          <Tag topic="League of Legends" onPress={() => 
+          {console.log('yippie');
+          }}></Tag>
+          <Tag topic="League of Legends" onPress={() => 
+          {console.log('yippie');
+          }}></Tag>
+          <Tag topic="League of Legends" onPress={() => 
+          {console.log('yippie');
+          }}></Tag>
+
+          </View>
+          <Link href="../InterestsPage" asChild>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Confirm</Text>
           </TouchableOpacity>
         </Link>
-          </View>
-        
         </View>
     </LinearGradient>
   );
@@ -56,7 +73,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     marginBottom: 500,
-    flex: 1,
+    flex: 0,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -65,7 +82,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#FFFFFF",
     paddingBottom: 20,
-    paddingTop: 100,
+    paddingTop: 150,
   },
   buttonContainer: {
     flexDirection: "row",
@@ -76,9 +93,11 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "#FFFFFF",
     borderRadius: 10,
+    borderColor:'black',
+    borderWidth:2,
     padding: 10,
     width:200,
-    marginLeft: 60,
+    marginLeft: 0,
     marginTop: 8
   },
   buttonText: {

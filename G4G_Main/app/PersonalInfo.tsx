@@ -23,7 +23,7 @@ export default function PersonalInfo() {
         <TextInput style={styles.input} placeholder="Password" />
         <TextInput style={styles.input} placeholder="Location" />
         <TextInput style={styles.input} placeholder="Age" />
-        <Link href="../IntrestsPage" asChild>
+        <Link href="../InterestsPage" asChild>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Register</Text>
           </TouchableOpacity>

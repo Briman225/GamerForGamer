@@ -20,27 +20,34 @@ const Card: React.FC<ButtonProps> = ({ topic, onPress }) => {
           borderTopLeftRadius: 15,
           height: 465,
           width: "80%",
-          marginTop: 300
+          marginTop: 300,
         }}
       >
         <Image
-          style={{ width:"100%", height:"100%", borderTopLeftRadius:15,borderTopRightRadius:15}}
+          style={{
+            width: "100%",
+            height: "100%",
+            borderTopLeftRadius: 15,
+            borderTopRightRadius: 15,
+          }}
           source={require("../assets/images/testImage.png")}
           resizeMode="cover"
         />
       </View>
 
-      <View
+      <LinearGradient
+        colors={["#0D13D3", "#2C96FB"]}
+        start={{ x: 0.5, y: 1.8 }} // Start from bottom-center
+        end={{ x: 0.5, y: 0 }}
         style={{
           marginTop: -1,
           width: "80%",
           height: 100,
-          padding: 10,
+          padding: 8,
           borderWidth: 1,
           borderBottomRightRadius: 15,
           borderBottomLeftRadius: 15,
           marginBottom: 10,
-          backgroundColor: "#0082FF",
           borderColor: "black",
           overflow: "hidden",
         }}
@@ -70,7 +77,7 @@ const Card: React.FC<ButtonProps> = ({ topic, onPress }) => {
             borderColor: "black",
           }}
         ></View>
-      </View>
+      </LinearGradient>
     </TouchableOpacity>
   );
 };
