@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 interface ButtonProps {
@@ -15,64 +15,62 @@ const Card: React.FC<ButtonProps> = ({ topic, onPress }) => {
     >
       <View
         style={{
-          borderRadius: 15,
-          height: 350,
-          width: "84%",
-          justifyContent: "center",
+          borderWidth: 1,
+          borderTopRightRadius: 15,
+          borderTopLeftRadius: 15,
+          height: 465,
+          width: "80%",
+          marginTop: 300
         }}
       >
-    <LinearGradient
-            colors={["#0D13D3", "#2C96FB"]}
-            start={{ x: -1, y: 1 }}
-            end={{ x: 0, y: 0 }}
-            style={{ position: "absolute" }}
+        <Image
+          style={{ width:"100%", height:"100%", borderTopLeftRadius:15,borderTopRightRadius:15}}
+          source={require("../assets/images/testImage.png")}
+          resizeMode="cover"
+        />
+      </View>
+
+      <View
+        style={{
+          marginTop: -1,
+          width: "80%",
+          height: 100,
+          padding: 10,
+          borderWidth: 1,
+          borderBottomRightRadius: 15,
+          borderBottomLeftRadius: 15,
+          marginBottom: 10,
+          backgroundColor: "#0082FF",
+          borderColor: "black",
+          overflow: "hidden",
+        }}
+      >
+        <View style={{}}>
+          <Text
+            style={{
+              fontSize: 20,
+            }}
           >
-        <View>
+            Nathan Miriki, 21
+          </Text>
+        </View>
+
         <View
           style={{
-            marginTop: 260,
-            width: "100%",
-            height: 100,
-            padding: 10,
-            borderWidth: 2,
-            borderBottomRightRadius: 15,
-            borderBottomLeftRadius: 15,
-            marginBottom: 10,
-            backgroundColor: "white",
-            borderColor: "black",
+            maxHeight: "60%",
             overflow: "hidden",
           }}
         >
-    
-            <View style={{}}>
-              <Text
-                style={{
-                  fontSize: 20,
-                }}
-              >
-                Nathan Miriki, 21
-              </Text>
-            </View>
-
-            <View
-              style={{
-                maxHeight: "60%",
-                overflow: "hidden",
-              }}
-            >
-              <Text>Stuff</Text>
-            </View>
-
-            <View
-              style={{
-                borderTopWidth: 1,
-                borderColor: "black",
-              }}
-            ></View>
+          <Text>Stuff</Text>
         </View>
-       </View>
-          </LinearGradient>
-        </View>
+
+        <View
+          style={{
+            borderTopWidth: 1,
+            borderColor: "black",
+          }}
+        ></View>
+      </View>
     </TouchableOpacity>
   );
 };
