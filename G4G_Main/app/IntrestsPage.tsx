@@ -24,6 +24,9 @@ export default function PersonalInfo() {
         <Text style={styles.title}>Tags</Text>
         <TextInput style={styles.input} placeholder="Search" />
         <View  style={{justifyContent:'space-between', flexDirection:'row'}}>
+        <Tag topic="League of Legends" onPress={() => 
+          {console.log('yippie');
+          }}></Tag>
           <Link href="../IntrestsPage" asChild>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Confirm</Text>
