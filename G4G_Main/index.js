@@ -4,7 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const user = require('./models/user'); // Import user-related functions
-
+const game = require('./models/game')
 // Create an instance of Express
 const app = express();
 
@@ -54,6 +54,48 @@ app.delete('/users/:id', (req, res) => {
     res.json({ message: 'User deleted successfully' });
   });
 });
+
+// GET all games
+app.get('/games', (req, res) => {
+	game.getAllGames((err, results) => {
+	  if (err) {
+		return res.status(500).json({ error: 'Unable to fetch games' });
+	  }
+	  res.json(results);
+	});
+  });
+
+// POST a new game
+app.post('/games', (req, res) => {
+	game.createGame(req.body, (err, result) => {
+	  if (err) {
+		return res.status(500).json({ error: 'Unable to create game' });
+	  }
+	  res.status(201).json(result);
+	});
+  });
+  
+  // PUT (update) a game by ID
+  app.put('/games/:id', (req, res) => {
+	const { id } = req.params;
+	game.updateGame(id, req.body, (err, result) => {
+	  if (err) {
+		return res.status(500).json({ error: 'Unable to update game' });
+	  }
+	  res.json({ message: 'Game updated successfully' });
+	});
+  });
+  
+  // DELETE a game by ID
+  app.delete('/games/:id', (req, res) => {
+	const { id } = req.params;
+	game.deleteGame(id, (err, result) => {
+	  if (err) {
+		return res.status(500).json({ error: 'Unable to delete game' });
+	  }
+	  res.json({ message: 'Game deleted successfully' });
+	});
+  });
 
 // Start the server
 const PORT = process.env.PORT || 3000;

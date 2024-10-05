@@ -15,10 +15,11 @@ CREATE TABLE users (
 
 
 CREATE TABLE games (
-	game_id INT NOT NULL,
-    game_title VARCHAR(200),
-    PRIMARY KEY (game_id)
+  game_id INT NOT NULL AUTO_INCREMENT,
+  game_title VARCHAR(255) NOT NULL,
+  PRIMARY KEY (game_id)
 );
+
 
 CREATE TABLE conversations (
   conversation_id INT NOT NULL,
