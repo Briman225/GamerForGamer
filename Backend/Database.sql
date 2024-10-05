@@ -22,12 +22,13 @@ CREATE TABLE games (
 
 
 CREATE TABLE conversations (
-  conversation_id INT NOT NULL,
-  participants JSON,
-  messages JSON,
-  conversation_meta JSON,
+  conversation_id INT NOT NULL AUTO_INCREMENT,
+  participants JSON NOT NULL,
+  messages JSON NOT NULL,
   PRIMARY KEY (conversation_id)
 );
+
+
 
 CREATE TABLE matches (
 	user_id_a INT NOT NULL,
