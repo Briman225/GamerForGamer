@@ -3,15 +3,16 @@ CREATE DATABASE `gamer_for_gamer`;
 USE `gamer_for_gamer`;
 
 CREATE TABLE users (
-	user_id INT NOT NULL,
-    username VARCHAR(50),
-    pass VARCHAR(50),
-    first_name VARCHAR(50),
-    last_name VARCHAR(50),
-    age INT,
-    zip_code INT NOT NULL,
-    PRIMARY KEY (user_id)
+  user_id INT NOT NULL AUTO_INCREMENT,
+  username VARCHAR(50),
+  pass VARCHAR(50),
+  first_name VARCHAR(50),
+  last_name VARCHAR(50),
+  age INT,
+  zip_code INT NOT NULL,
+  PRIMARY KEY (user_id)
 );
+
 
 CREATE TABLE games (
 	game_id INT NOT NULL,
@@ -40,4 +41,3 @@ CREATE TABLE selections (
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (game_id) REFERENCES games(game_id)
 );
-
