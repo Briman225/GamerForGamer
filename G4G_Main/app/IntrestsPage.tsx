@@ -1,9 +1,18 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import Tag from '../components/tag';
+import { ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+  Dimensions,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Link } from "expo-router";
 
-export default function HomeScreen() {
+export default function PersonalInfo() {
   return (
     <LinearGradient
       colors={["#0D13D3", "#2C96FB"]}
@@ -12,50 +21,62 @@ export default function HomeScreen() {
       style={styles.container}
     >
       <View style={styles.titleContainer}>
-        <Text style={styles.title}>Gamers 4 Gamers</Text>
-      </View>
-      <View style={styles.buttonContainer}>
-        <Link href="../LoginPage" asChild>
+        <Text style={styles.title}>Tags</Text>
+        <TextInput style={styles.input} placeholder="Search" />
+        <View  style={{justifyContent:'space-between', flexDirection:'row'}}>
+          <Link href="../IntrestsPage" asChild>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Sign In</Text>
+            <Text style={styles.buttonText}>Confirm</Text>
           </TouchableOpacity>
         </Link>
-        <Link href="../PersonalInfo" asChild>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Sign Up</Text>
-          </TouchableOpacity>
-        </Link>
-      </View>
+          </View>
+        
+        </View>
     </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
+  input: {
+    height: 50,
+    margin: 12,
+    borderWidth: 1,
+    width: 300,
+    padding: 10,
+    backgroundColor: "white",
+    borderRadius: 10,
+  },
   container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
   titleContainer: {
-    marginBottom: 20,
+    marginBottom: 500,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   title: {
-    fontSize: 80,
+    fontSize: 40,
     fontWeight: "bold",
     color: "#FFFFFF",
     paddingBottom: 20,
+    paddingTop: 100,
   },
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    width: "80%",
+    paddingLeft: 200,
   },
   button: {
     backgroundColor: "#FFFFFF",
     borderRadius: 10,
     padding: 10,
-    width: "45%",
+    width:200,
+    marginLeft: 60,
+    marginTop: 8
   },
   buttonText: {
     fontSize: 18,
