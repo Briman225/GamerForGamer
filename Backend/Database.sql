@@ -31,10 +31,12 @@ CREATE TABLE conversations (
 
 
 CREATE TABLE matches (
+	match_id INT NOT NULL AUTO_INCREMENT,
 	user_id_a INT NOT NULL,
     user_id_b INT NOT NULL,
     FOREIGN KEY (user_id_a) REFERENCES users(user_id),
-    FOREIGN KEY (user_id_b) REFERENCES users(user_id)
+    FOREIGN KEY (user_id_b) REFERENCES users(user_id),
+    PRIMARY KEY (match_id)
 );
 
 CREATE TABLE selections (

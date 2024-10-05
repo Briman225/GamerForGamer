@@ -25,6 +25,20 @@ app.get('/users', (req, res) => {
   });
 });
 
+// GET a user by ID
+app.get('/user/:id', (req, res) => {
+	const { id } = req.params;
+	user.getUserById(id, (err, result) => {
+	  if (err) {
+		return res.status(500).json({ error: 'Unable to fetch user' });
+	  }
+	  if (!result) {
+		return res.status(404).json({ error: 'User not found' });
+	  }
+	  res.json(result);
+	});
+  });
+
 // POST a new user
 app.post('/users', (req, res) => {
   user.createUser(req.body, (err, result) => {
@@ -64,6 +78,20 @@ app.get('/games', (req, res) => {
 		return res.status(500).json({ error: 'Unable to fetch games' });
 	  }
 	  res.json(results);
+	});
+  });
+
+// GET a game by ID
+app.get('/game/:id', (req, res) => {
+	const { id } = req.params;
+	game.getGameById(id, (err, result) => {
+	  if (err) {
+		return res.status(500).json({ error: 'Unable to fetch game' });
+	  }
+	  if (!result) {
+		return res.status(404).json({ error: 'Game not found' });
+	  }
+	  res.json(result);
 	});
   });
 
