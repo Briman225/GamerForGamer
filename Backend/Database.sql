@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS `G4G`;
-CREATE DATABASE `G4G`;
-USE `G4G`;
+DROP DATABASE IF EXISTS `gamer_for_gamer`;
+CREATE DATABASE `gamer_for_gamer`;
+USE `gamer_for_gamer`;
 
-CREATE TABLE user_profiles (
+CREATE TABLE users (
 	user_id INT NOT NULL,
     username VARCHAR(50),
     pass VARCHAR(50),
@@ -37,7 +37,7 @@ CREATE TABLE matches (
 CREATE TABLE selections (
 	user_id INT NOT NULL,
     game_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES user_profiles(user_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (game_id) REFERENCES games(game_id)
 );
 
