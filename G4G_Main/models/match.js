@@ -28,9 +28,9 @@ const createMatch = (matchData, callback) => {
 
 // Update a match by ID
 const updateMatch = (id, matchData, callback) => {
-  const { matchname, pass, first_name, last_name, age, zip_code } = matchData;
-  const sql = 'UPDATE matches SET matchname = ?, pass = ?, first_name = ?, last_name = ?, age = ?, zip_code = ? WHERE match_id = ?';
-  db.query(sql, [matchname, pass, first_name, last_name, age, zip_code, id], (err, result) => {
+  const { user_id_a, user_id_b } = matchData;
+  const sql = 'UPDATE matches SET user_id_a = ?, user_id_b = ? WHERE match_id = ?';
+  db.query(sql, [user_id_a, user_id_b, id], (err, result) => {
     if (err) {
       return callback(err, null);
     }

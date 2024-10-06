@@ -5,6 +5,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const user = require('./models/user'); // Import user-related functions
 const game = require('./models/game');
+const match = require('./models/match')
 const conversation = require('./models/conversation');
 
 // Create an instance of Express
@@ -184,6 +185,62 @@ app.post('/games', (req, res) => {
 	});
   });
   
+  // GET all matches
+  app.get('/match', (req, res) => {
+	match.getAllMatches((err, results) => {
+	  if (err) {
+		return res.status(500).json({ error: 'Unable to fetch matches' });
+	  }
+	  res.json(results);
+	});
+  });
+  
+  // GET a match by ID
+  app.get('/match/:id', (req, res) => {
+	const { id } = req.params;
+	match.getMatchById(id, (err, result) => {
+	  if (err) {
+		return res.status(500).json({ error: 'Unable to fetch match' });
+	  }
+	  if (!result) {
+		return res.status(404).json({ error: 'Match not found' });
+	  }
+	  res.json(result);
+	});
+  });
+  
+  // POST a new match
+  app.post('/match', (req, res) => {
+	match.createMatch(req.body, (err, result) => {
+	  if (err) {
+		return res.status(500).json({ error: 'Unable to create match' });
+	  }
+	  res.status(201).json(result);
+	});
+  });
+  
+  // PUT (update) a match by ID
+  app.put('/match/:id', (req, res) => {
+	const { id } = req.params;
+	match.updateMatch(id, req.body, (err, result) => {
+	  if (err) {
+		return res.status(500).json({ error: 'Unable to update match' });
+	  }
+	  res.json({ message: 'Match updated successfully' });
+	});
+  });
+  
+  // DELETE a match by ID
+  app.delete('/match/:id', (req, res) => {
+	const { id } = req.params;
+	match.deleteMatch(id, (err, result) => {
+	  if (err) {
+		return res.status(500).json({ error: 'Unable to delete match' });
+	  }
+	  res.json({ message: 'Match deleted successfully' });
+	});
+  });
+
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
