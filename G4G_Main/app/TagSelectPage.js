@@ -12,7 +12,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { Link } from "expo-router";
 
-export default function PersonalInfo() {
+export default function TagSelectPage() {
   return (
     <LinearGradient
       colors={["#0D13D3", "#2C96FB"]}

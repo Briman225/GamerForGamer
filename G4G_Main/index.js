@@ -6,6 +6,15 @@ const bodyParser = require('body-parser');
 const user = require('./models/user'); // Import user-related functions
 const game = require('./models/game');
 const conversation = require('./models/conversation');
+const mysql = require('mysql2');
+
+const db = mysql.createPool({
+  host: process.env.DB_HOST,      // Use environment variable
+  user: process.env.DB_USER,      // Use environment variable
+  password: process.env.DB_PASSWORD,  // Use environment variable
+  database: process.env.DB_NAME,  // Use environment variable
+  port: process.env.DB_PORT || 3306,  // Use default port if not specified in .env
+});
 
 // Create an instance of Express
 const app = express();
@@ -38,6 +47,28 @@ app.get('/user/:id', (req, res) => {
 	  res.json(result);
 	});
   });
+
+  app.get('/login', async (req, res) => {
+	// incoming: login, password
+	// outgoing: id, error
+	console.log('yippie');
+	let error = '';
+	const { username, pass } = req.body;
+	const login = 'SELECT * FROM users WHERE username = ?';
+
+	db.query(login, [username], (err, results) => {
+		if (err) {
+		  console.error('Error executing query:', err);
+		  return res.status(500).json({ error: 'Internal Server Error' });
+		}
+	
+		if (results.length > 0 && results[0].pass == pass) {
+		  res.json(results[0]); // Return the first user found
+		} else {
+		  res.status(404).json({ error: 'User not found' });
+		}
+	  });
+	});
 
 // POST a new user
 app.post('/users', (req, res) => {

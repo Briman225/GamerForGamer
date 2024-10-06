@@ -1,15 +1,9 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Link } from "expo-router";
 
-export default function LoginPage() {
+export default function StartPage() {
   return (
     <LinearGradient
       colors={["#0D13D3", "#2C96FB"]}
@@ -17,32 +11,26 @@ export default function LoginPage() {
       end={{ x: 0, y: 0 }}
       style={styles.container}
     >
-      <View>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Gamers 4 Gamers</Text>
-          </View>
-          <TextInput style={styles.input} placeholder="Username" />
-          <TextInput style={styles.input} placeholder="Password" />
-          <View>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>Gamers 4 Gamers</Text>
+      </View>
+      <View style={styles.buttonContainer}>
+        <Link href="../LoginPage" asChild>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Login</Text>
+            <Text style={styles.buttonText}>Sign In</Text>
           </TouchableOpacity>
-        </View>
+        </Link>
+        <Link href="../PersonalInfo" asChild>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>Sign Up</Text>
+          </TouchableOpacity>
+        </Link>
       </View>
     </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  input: {
-    height: 50,
-    margin: 12,
-    borderWidth: 1,
-    width: 300,
-    padding: 10,
-    backgroundColor: "white",
-    borderRadius: 10,
-  },
   container: {
     flex: 1,
     justifyContent: "center",
@@ -52,26 +40,22 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   title: {
-    fontSize: 40,
+    fontSize: 80,
     fontWeight: "bold",
     color: "#FFFFFF",
     paddingBottom: 20,
   },
   buttonContainer: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
     width: "80%",
-    paddingLeft: 200
-    
   },
   button: {
     backgroundColor: "#FFFFFF",
     borderRadius: 10,
     padding: 10,
     width: "45%",
-    marginLeft: 90,
-    marginBottom:300
   },
   buttonText: {
     fontSize: 18,

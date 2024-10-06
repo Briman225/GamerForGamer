@@ -8,8 +8,37 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Link } from "expo-router";
+import { useNavigation } from '@react-navigation/native';
 
-export default function PersonalInfo() {
+
+function LoginPage() {
+  const navigation = useNavigation();
+
+  const handleSignIn = async () => {
+    if (username.length === 0 || password.length === 0) {
+			setErrorMessage('Please fill in the required fields');
+			return;
+		}
+    
+    console.log('ENtttter')
+    navigation.navigate('Register');
+
+    // try {
+		// 	const response = await fetch('http://localhost:3000/login', {
+		// 		method: 'GET',
+		// 		headers: {
+		// 			'Content-Type': 'application/json',
+		// 		},
+		// 		body: JSON.stringify({
+		// 			username: username,
+		// 			password: password,
+		// 		}),
+		// 	});
+
+    //   const data = await response.json();
+      
+	};
+
   return (
     <LinearGradient
       colors={["#0D13D3", "#2C96FB"]}
@@ -17,20 +46,20 @@ export default function PersonalInfo() {
       end={{ x: 0, y: 0 }}
       style={styles.container}
     >
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>Gamers 4 Gamers</Text>
+      <View>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Gamers 4 Gamers</Text>
+        </View>
         <TextInput style={styles.input} placeholder="Username" />
         <TextInput style={styles.input} placeholder="Password" />
-        <TextInput style={styles.input} placeholder="Location" />
-        <TextInput style={styles.input} placeholder="Age" />
-        <Link href="../InterestsPage" asChild>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Register</Text>
+        <View>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Register')}>
+            <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
-        </Link>
+        </View>
       </View>
     </LinearGradient>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -49,7 +78,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   titleContainer: {
-    marginBottom: "80%",
+    marginBottom: 20,
   },
   title: {
     fontSize: 40,
@@ -59,17 +88,18 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
+    width: "80%",
     paddingLeft: 200,
   },
   button: {
     backgroundColor: "#FFFFFF",
     borderRadius: 10,
     padding: 10,
-    width:200,
-    marginLeft: 60,
-    marginTop: 11
+    width: "45%",
+    marginLeft: 90,
+    marginBottom: 300,
   },
   buttonText: {
     fontSize: 18,
@@ -77,3 +107,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
+
+export default LoginPage

@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Link } from "expo-router";
-import Card from '../../components/card';
+import Card from '../components/card';
 
 export default function LoginPage() {
   return (
