@@ -40,8 +40,10 @@ CREATE TABLE matches (
 );
 
 CREATE TABLE selections (
-	user_id INT NOT NULL,
-    game_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (game_id) REFERENCES games(game_id)
+  selection_id INT NOT NULL AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  game_id INT NOT NULL,
+  PRIMARY KEY (selection_id),
+  FOREIGN KEY (user_id) REFERENCES users(user_id),
+  FOREIGN KEY (game_id) REFERENCES games(game_id)
 );

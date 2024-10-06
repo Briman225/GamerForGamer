@@ -7,6 +7,7 @@ const user = require('./models/user'); // Import user-related functions
 const game = require('./models/game');
 const match = require('./models/match')
 const conversation = require('./models/conversation');
+const selection = require('./models/selection');
 
 // Create an instance of Express
 const app = express();
@@ -240,6 +241,63 @@ app.post('/games', (req, res) => {
 	  res.json({ message: 'Match deleted successfully' });
 	});
   });
+
+// GET all selections
+app.get('/selections', (req, res) => {
+	selection.getAllSelections((err, results) => {
+	  if (err) {
+		return res.status(500).json({ error: 'Unable to fetch selections' });
+	  }
+	  res.json(results);
+	});
+});
+
+// GET a selection by ID
+app.get('/selection/:id', (req, res) => {
+	const { id } = req.params;
+	selection.getSelectionById(id, (err, result) => {
+	  if (err) {
+		return res.status(500).json({ error: 'Unable to fetch selection' });
+	  }
+	  if (!result) {
+		return res.status(404).json({ error: 'Selection not found' });
+	  }
+	  res.json(result);
+	});
+});
+
+app.post('/selection', (req, res) => {
+	selection.createSelection(req.body, (err, result) => {
+	  if (err) {
+		console.error('Error:', err); // Log the error to the console
+		return res.status(500).json({ error: 'Unable to create selection', details: err.message });
+	  }
+	  res.status(201).json(result);
+	});
+  });
+  
+
+// PUT (update) a selection by ID
+app.put('/selection/:id', (req, res) => {
+	const { id } = req.params;
+	selection.updateSelection(id, req.body, (err, result) => {
+	  if (err) {
+		return res.status(500).json({ error: 'Unable to update selection' });
+	  }
+	  res.json({ message: 'Selection updated successfully' });
+	});
+});
+
+// DELETE a selection by ID (fixed typo)
+app.delete('/selection/:id', (req, res) => {
+	const { id } = req.params;
+	selection.deleteSelection(id, (err, result) => {
+	  if (err) {
+		return res.status(500).json({ error: 'Unable to delete selection' });
+	  }
+	  res.json({ message: 'Selection deleted successfully' });
+	});
+});
 
 // Start the server
 const PORT = process.env.PORT || 3000;
