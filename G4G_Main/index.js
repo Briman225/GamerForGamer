@@ -8,6 +8,8 @@ const game = require('./models/game');
 const match = require('./models/match')
 const conversation = require('./models/conversation');
 const selection = require('./models/selection');
+const like = require('./models/like'); // Make sure to import like-related functions
+
 
 // Create an instance of Express
 const app = express();
@@ -298,6 +300,78 @@ app.delete('/selection/:id', (req, res) => {
 	  res.json({ message: 'Selection deleted successfully' });
 	});
 });
+
+// POST: Add a like (user likes another user)
+app.post('/like', (req, res) => {
+  like.addLike(req.body, (err, result) => {
+    if (err) {
+      return res.status(500).json({ error: 'Unable to add like' });
+    }
+    res.status(201).json(result);
+  });
+});
+
+// DELETE: Remove a like (user unlikes another user)
+app.delete('/like', (req, res) => {
+  const { user_id, liked_user_id } = req.body;
+  if (!user_id || !liked_user_id) {
+    return res.status(400).json({ error: 'user_id and liked_user_id are required' });
+  }
+  like.removeLike(user_id, liked_user_id, (err, result) => {
+    if (err) {
+      return res.status(500).json({ error: 'Unable to remove like' });
+    }
+    res.json({ message: 'Like removed successfully' });
+  });
+});
+
+// GET: Get all users that a specific user has liked
+app.get('/likes/:user_id', (req, res) => {
+  const { user_id } = req.params;
+  like.getLikesByUser(user_id, (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: 'Unable to fetch likes' });
+    }
+    res.json(results);
+  });
+});
+
+// GET: Get all users who liked a specific user
+app.get('/liked-by/:user_id', (req, res) => {
+  const { user_id } = req.params;
+  like.getUsersWhoLiked(user_id, (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: 'Unable to fetch users who liked' });
+    }
+    res.json(results);
+  });
+});
+
+// GET: Check for mutual likes (whether two users liked each other)
+// http://localhost:3000/mutual-like?user_id=1&liked_user_id=2
+// GET: Check for mutual likes and create a match if mutual
+app.get('/mutual-like', (req, res) => {
+	const { user_id, liked_user_id } = req.query;
+  
+	if (!user_id || !liked_user_id) {
+	  return res.status(400).json({ error: 'user_id and liked_user_id are required' });
+	}
+  
+	like.checkMutualLike(user_id, liked_user_id, (err, result) => {
+	  if (err) {
+		return res.status(500).json({ error: 'Unable to check mutual like' });
+	  }
+	  
+	  // If a match was created, return the result
+	  if (result.isMutual) {
+		res.json({ message: 'Mutual like found, match created!', match: result.match });
+	  } else {
+		res.json({ message: 'No mutual like found' });
+	  }
+	});
+  });
+  
+
 
 // Start the server
 const PORT = process.env.PORT || 3000;

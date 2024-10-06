@@ -47,3 +47,12 @@ CREATE TABLE selections (
   FOREIGN KEY (user_id) REFERENCES users(user_id),
   FOREIGN KEY (game_id) REFERENCES games(game_id)
 );
+
+CREATE TABLE user_likes (
+  like_id INT NOT NULL AUTO_INCREMENT,
+  user_id INT NOT NULL,          -- The user who is liking
+  liked_user_id INT NOT NULL,     -- The user being liked
+  PRIMARY KEY (like_id),
+  FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+  FOREIGN KEY (liked_user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
