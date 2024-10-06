@@ -14,6 +14,17 @@ const getAllGames = (callback) => {
   });
 };
 
+const getGameById = (game_id, callback) => {
+	const sql = 'SELECT * FROM games WHERE game_id = ?';
+	db.query(sql, [game_id], (err, results) => {
+		if (err) {
+			console.error('Error fetching game:', err);
+			return callback(err, null);
+		}
+		callback(null, results);
+	});
+};
+
 // Add a new game
 const createGame = (gameData, callback) => {
 	const { game_title } = gameData;
@@ -53,6 +64,7 @@ const deleteGame = (id, callback) => {
 // Export functions for use in other files
 module.exports = {
   getAllGames,
+  getGameById,
   createGame,
   updateGame,
   deleteGame

@@ -14,6 +14,17 @@ const getAllUsers = (callback) => {
   });
 };
 
+const getUserById = (user_id, callback) => {
+	const sql = 'SELECT * FROM users WHERE user_id = ?';
+	db.query(sql, [user_id], (err, results) => {
+		if (err) {
+			console.error('Error fetching user:', err);
+			return callback(err, null);
+		}
+		callback(null, results);
+	});
+};
+
 // Add a new user
 const createUser = (userData, callback) => {
   const { username, pass, first_name, last_name, age, zip_code } = userData;
@@ -52,6 +63,7 @@ const deleteUser = (id, callback) => {
 // Export functions for use in other files
 module.exports = {
   getAllUsers,
+  getUserById,
   createUser,
   updateUser,
   deleteUser

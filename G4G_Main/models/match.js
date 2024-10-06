@@ -14,6 +14,17 @@ const getAllMatches = (callback) => {
   });
 };
 
+const getMatchById = (match_id, callback) => {
+	const sql = 'SELECT * FROM matches WHERE match_id = ?';
+	db.query(sql, [match_id], (err, results) => {
+		if (err) {
+			console.error('Error fetching match:', err);
+			return callback(err, null);
+		}
+		callback(null, results);
+	});
+};
+
 // Add a new match
 const createMatch = (matchData, callback) => {
   const { user_id_a, user_id_b } = matchData;
@@ -52,6 +63,7 @@ const deleteMatch = (id, callback) => {
 // Export functions for use in other files
 module.exports = {
   getAllMatches,
+  getMatchById,
   createMatch,
   updateMatch,
   deleteMatch

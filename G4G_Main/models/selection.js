@@ -14,6 +14,17 @@ const getAllSelections = (callback) => {
   });
 };
 
+const getSelectionById = (selection_id, callback) => {
+	const sql = 'SELECT * FROM selections WHERE selection_id = ?';
+	db.query(sql, [selection_id], (err, results) => {
+		if (err) {
+			console.error('Error fetching selection:', err);
+			return callback(err, null);
+		}
+		callback(null, results);
+	});
+};
+
 // Add a new selection
 const createSelection = (selectionData, callback) => {
 	const { user_id, game_id } = selectionData;
@@ -59,6 +70,7 @@ const deleteSelection = (id, callback) => {
 // Export functions for use in other files
 module.exports = {
   getAllSelections,
+  getSelectionById,
   createSelection,
   updateSelection,
   deleteSelection
